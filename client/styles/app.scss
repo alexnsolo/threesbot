@@ -1,0 +1,38 @@
+@import "_mixins";
+
+.threes-bot--board {
+	.threes-bot--row {
+		.threes-bot--tile {
+			height: 50px;
+			width: 50px;
+			border: 1px solid rgba(black, 0.2);
+			background: #B6D9D9;
+			display: inline-block;
+
+			&.one {
+				background: #66CCFF;
+			}
+
+			&.two {
+				background: #FF6680;
+			}
+
+			&.number {
+				background: white;
+			}
+		}
+	}
+
+	.threes-bot--move-btn {
+		@include no-select;
+		padding: 10px 20px;
+		border: 1px solid black;
+		background: gray;
+		display: inline-block;
+
+		&.enabled {
+			background: white;
+			cursor: pointer;
+		}
+	}
+}

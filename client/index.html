@@ -4,5 +4,16 @@
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi"></meta>
 </head>
 <body ng-app="threes-bot" ng-strict-di="">
- {{1+1}}
+	<div class="threes-bot--board" ng-controller="BoardCtrl">
+		<div class="threes-bot--row" ng-repeat="row in board.tiles track by $index">
+			<div class="threes-bot--tile" ng-repeat="tile in row track by $index" ng-class="getTileClass(tile)">{{tile}}</div>
+		</div>
+		<div class="threes-bot--move-btn" ng-click="doMove('UP')" ng-class="{'enabled': canMove('UP')}">UP</div>
+		<div class="threes-bot--move-btn" ng-click="doMove('DOWN')" ng-class="{'enabled': canMove('DOWN')}">DOWN</div>
+		<div class="threes-bot--move-btn" ng-click="doMove('LEFT')" ng-class="{'enabled': canMove('LEFT')}">LEFT</div>
+		<div class="threes-bot--move-btn" ng-click="doMove('RIGHT')" ng-class="{'enabled': canMove('RIGHT')}">RIGHT</div>
+		<div>Next: {{board.nextTile}}</div>
+		<div>Has Lost? {{board.hasLost}}</div>
+		<div>Score: {{board.score}}</div>
+	</div>
 </body>
