@@ -80,7 +80,6 @@
 		position: absolute;
 		bottom: 33px;
 		left: 25px;
-		width: 200px;
 
 		label {
 			color: rgba(white, 0.5);
@@ -90,7 +89,6 @@
 			position: absolute;
 			bottom: -15px;
 			left: 10px;
-			width: 200px;
 		}
 	}
 
@@ -145,7 +143,6 @@
 		left: 57px;
 		bottom: 98px;
 		right: 16px;
-
 	}
 
 	.threes-bot--monitor-body {
@@ -192,5 +189,86 @@
 		position: absolute;
 		bottom: -18px;
 		right: 0px;
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	.threes-bot--home {
+		width: 100%;
+		margin-top: 140px;
+		height: 1000px;
+
+		.threes-bot--share-btn {
+			position: absolute;
+			top: -170px;
+			right: 30px;
+		}
+
+		.threes-bot--bot {
+			position: relative;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			width: 300px;
+			margin: 0 auto;
+		}
+
+		.threes-bot--monitor {
+			position: relative;
+			top: 40px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			width: 100%;
+			max-width: 400px;
+			margin: 0 auto;
+			padding: 0px;
+			height: 400px;
+		}
+
+		.threes-bot--monitor-body {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			bottom: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100%;
+		}
+
+		.threes-bot--terminal {
+			position: absolute;
+			top: 38px;
+			left: 15px;
+			bottom: 73px;
+			right: 14px;
+		}
+
+		.threes-bot--bot-cable {
+			display: none;
+		}
+
+		.threes-bot--test-btn {
+			position: absolute;
+			top: -20px;
+			bottom: auto;
+			left: 0px;
+		}
+
+		.threes-bot--manual-toggle {
+			position: absolute;
+			bottom: 31px;
+    	left: 86px;
+		}
+
+		.threes-bot--manual {
+			position: absolute;
+			top: 45px;
+			left: 37px;
+			right: 26px;
+			font-size: 11px;
+		}
 	}
 }
