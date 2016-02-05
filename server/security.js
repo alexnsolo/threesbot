@@ -9,7 +9,7 @@ var analyzeAlgorithmLimit = {
 		name: 'Algorithm.analyze'
 };
 
-DDPRateLimiter.addRule(testAlgorithmLimit, 1, 500);
+DDPRateLimiter.addRule(testAlgorithmLimit, 5, 1000);
 DDPRateLimiter.addRule(analyzeAlgorithmLimit, 1, 5000);
 DDPRateLimiter.setErrorMessage(function() {
 	return "Please wait and try again in a few seconds.";

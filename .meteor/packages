@@ -31,3 +31,4 @@ ddp-rate-limiter
 rate-limit
 localstorage
 service-configuration
+angularui:angular-ui-router

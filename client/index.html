@@ -4,26 +4,19 @@
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi"></meta>
 </head>
 <body ng-app="threes-bot" ng-strict-di="">
-	<div class="threes-bot--board" ng-controller="BoardCtrl">
-		<div class="threes-bot--row" ng-repeat="row in board.tiles track by $index">
-			<div class="threes-bot--tile" ng-repeat="tile in row track by $index" ng-class="getTileClass(tile)">{{tile}}</div>
+	<div id="header">
+		<h1 class="threes-bot--title">Threes Bot</h1>
+		<div class="threes-bot--subtitle">
+			Help Threes Bot solve the game of Threes with a little bit of JavaScript.
 		</div>
-		<div>Next: {{board.nextTile}}</div>
-		<div>Has Lost? {{board.hasLost}}</div>
-		<div>Score: {{board.score}}</div>
-		<br>
-		<div>Available variables:</div>
-		<ul>
-			<li>BOARD: an array of arrays representing the board</li>
-			<li>NEXT: the next tile</li>
-			<li>VALID_MOVES: all valid moves</li>
-			<li>RANDOM_NUMBER: a random number between 0 - 1 (Math.random())</li>
-			<li>RANDOM_MOVE: a random valid move</li>
-		</ul>
-		<textarea cols="30" rows="10" ng-model="code"></textarea>
-		<div class="threes-bot--move-btn" ng-click="test()">TEST</div>
-		<div class="threes-bot--move-btn" ng-click="analyze()">ANALYZE</div>
-		<div ng-if="error">Oof! That doesn't work...</div>
-		<pre>{{algorithm.runs | json}}</pre>
+	</div>
+	<div id="content">
+		<div ui-view></div>
+	</div>
+	<div id="footer">
+		<div>
+			<span>Made with ❤ by</span>
+			<a href="https://twitter.com/civilframe" target="_blank">Alex Solo</a>
+		</div>
 	</div>
 </body>

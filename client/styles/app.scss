@@ -1,35 +1,52 @@
 @import "_mixins";
 
-.threes-bot--board {
-	.threes-bot--row {
-		.threes-bot--tile {
-			height: 50px;
-			width: 50px;
-			border: 1px solid rgba(black, 0.2);
-			background: #B6D9D9;
-			display: inline-block;
+body {
+	width: 800px;
+	margin: 0 auto;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	background: lighten(gray, 45%);
+	color: #50514F;
 
-			&.one {
-				background: #66CCFF;
-			}
-
-			&.two {
-				background: #FF6680;
-			}
-
-			&.number {
-				background: white;
-			}
-		}
+	@include bp-small {
+		width: 100%;
+		margin: 10px 0px 30px 0px;
 	}
 
-	.threes-bot--move-btn {
-		@include no-select;
-		padding: 10px 20px;
-		border: 1px solid black;
-		background: white;
-		cursor: pointer;
-		width: 100px;
-		text-align: center;
+	a {
+		color: #50514F;
+		font-weight: bold;
 	}
+}
+
+#header {
+	text-align: right;
+	padding: 20px 0 50px 0;
+
+	.threes-bot--title {
+		@include text-shadow(1px, 1px, 1px, darken(#F25F5C, 50%));
+		font-family: 'Lobster', 'Open Sans', sans-serif;
+		font-size: 80px;
+		color: #F25F5C;
+		margin: 0 0 5px 0;
+	}
+
+	.threes-bot--subtitle {
+		@include text-shadow(1px, 1px, 0px, white);
+		text-align: right;
+		font-size: 12px;
+		width: 260px;
+		display: inline-block;
+		color: lighten(#50514F, 10%);
+	}
+}
+
+#content {
+
+}
+
+#footer {
+	text-align: center;
+	font-size: 11px;
+	margin-top: 50px;
 }

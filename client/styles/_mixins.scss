@@ -1,3 +1,24 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url(http://fonts.googleapis.com/css?family=Nunito:300,400,700);
+
+@mixin bp-large {
+	@media only screen and (max-width: 60em) {
+		@content;
+	}
+}
+
+@mixin bp-medium {
+	@media only screen and (max-width: 40em) {
+		@content;
+	}
+}
+
+@mixin bp-small {
+	@media only screen and (max-width: 30em) {
+		@content;
+	}
+}
+
 @mixin css3-prefix($property, $value) {
 	-webkit-#{$property}: #{$value};
 	 -khtml-#{$property}: #{$value};
@@ -9,4 +30,24 @@
 
 @mixin no-select {
 	@include css3-prefix('user-select', none);
+}
+
+@mixin text-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4)) {
+	text-shadow: $x $y $blur $color;
+}
+
+@mixin box-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4), $inset: "") {
+	@if ($inset != "") {
+		@include css3-prefix('box-shadow', $inset $x $y $blur $color);
+	} @else {
+		@include css3-prefix('box-shadow', $x $y $blur $color);
+	}
+}
+
+@mixin border-radius($radius: 5px) {
+		@include css3-prefix('border-radius', $radius);
+}
+
+@mixin translateY($params) {
+	@include css3-prefix('transform', translateY($params));
 }

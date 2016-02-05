@@ -1,54 +1,28 @@
 _ = lodash;
 
 angular.module('threes-bot', [
-	'angular-meteor'
+	'angular-meteor',
+	'ui.router',
+	'ui.ace'
 ]);
 
 angular.module('threes-bot').run(function() {
 	console.log('Threes Bot initialized.');
 });
 
-angular.module('threes-bot').controller('BoardCtrl', function($scope, $meteor) {
-	$scope.board = new Threes.Board();
-	$scope.code = '';
-	$scope.isLoading = false;
+angular.module('threes-bot').config(function($urlRouterProvider, $stateProvider, $locationProvider) {
+	$locationProvider.html5Mode(true);
+	$urlRouterProvider.otherwise('/');
 
-	$scope.test = function() {
-		$scope.error = false;
-
-		$meteor.call('Algorithm.test', $scope.code, $scope.board.tiles, $scope.board.nextTile)
-			.then(function(direction) {
-				if (direction != 'ERROR' && $scope.board.isMoveValid(direction)) {
-					$scope.board.moveInDirection(direction);
-				}
-				else {
-					$scope.error = true;
-				}
-			});
-	};
-
-	$scope.analyze = function() {
-		$meteor.call('Algorithm.analyze', $scope.code)
-			.then(function(algorithmId) {
-				$scope.helpers({
-			    algorithm: () => Algorithms.findOne(algorithmId)
-			  });
-			});
-	};
-
-	$scope.getTileClass = function(tile) {
-		if (tile === 0) {
-			return "";
-		}
-		else if (tile === 1) {
-			return "one";
-		}
-		else if (tile === 2) {
-			return "two";
-		}
-		else {
-			return "number";
-		}
-	};
-
+	$stateProvider
+		.state('home', {
+			url: '/',
+			templateUrl: 'client/views/home.html',
+			controller: 'HomeCtrl'
+		})
+		.state('algorithm', {
+			url: '/a/:algorithmId',
+			templateUrl: 'client/views/algorithm.html',
+			controller: 'AlgorithmCtrl'
+		});
 });
