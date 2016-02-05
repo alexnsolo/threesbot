@@ -17,11 +17,14 @@
 			<li>RANDOM_NUMBER: a random number between 0 - 1 (Math.random())</li>
 			<li>RANDOM_MOVE: a random valid move</li>
 		</ul>
-		<textarea cols="30" rows="10" ng-model="algorithm"></textarea>
+		<textarea cols="30" rows="10" ng-model="algorithm.code"></textarea>
 		<div class="threes-bot--move-btn" ng-click="makeMove()">EXECUTE</div>
+		<div class="threes-bot--move-btn" ng-click="analyze()">ANALYZE</div>
+		<div ng-if="isLoading">Working...</div>
 		<div ng-if="error">Oof! That doesn't work...</div>
 		<div>Next: {{board.nextTile}}</div>
 		<div>Has Lost? {{board.hasLost}}</div>
 		<div>Score: {{board.score}}</div>
+		<pre>{{analysis | json}}</pre>
 	</div>
 </body>

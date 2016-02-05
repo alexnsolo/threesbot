@@ -10,12 +10,13 @@ angular.module('threes-bot').run(function() {
 
 angular.module('threes-bot').controller('BoardCtrl', function($scope, $meteor) {
 	$scope.board = new Threes.Board();
-	$scope.algorithm = "";
+	$scope.algorithm = {code: ''};
+	$scope.isLoading = false;
 
 	$scope.makeMove = function() {
 		$scope.error = false;
 
-		$meteor.call('Algorithm.execute', $scope.board.tiles, $scope.board.nextTile, $scope.algorithm)
+		$meteor.call('Algorithm.test', $scope.algorithm, $scope.board.tiles, $scope.board.nextTile)
 			.then(function(direction) {
 				if (direction != 'ERROR' && $scope.board.isMoveValid(direction)) {
 					$scope.board.moveInDirection(direction);
@@ -23,6 +24,20 @@ angular.module('threes-bot').controller('BoardCtrl', function($scope, $meteor) {
 				else {
 					$scope.error = true;
 				}
+			});
+	};
+
+	$scope.analyze = function() {
+		// if ($scope.analysis && $scope.analysis.isProcessing) {
+		// 	return;
+		// }
+
+		$meteor.call('Algorithm.analyze', $scope.algorithm)
+			.then(function(analysisId) {
+				console.log(analysisId);
+				$scope.helpers({
+			    analysis: () => Analyses.findOne(analysisId)
+			  });
 			});
 	};
 
