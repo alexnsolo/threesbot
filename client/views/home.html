@@ -1,0 +1,46 @@
+<div class="threes-bot--home">
+	<div class="threes-bot--share-btn threes-bot--btn twitter" ng-click="tweet()">
+		<img src="/images/twitter.svg">
+		<span>Tweet</span>
+	</div>
+	<div class="threes-bot--bot">
+		<img class="threes-bot--bot-body" src="/images/threesbot.svg">
+		<div class="threes-bot--board">
+			<div class="threes-bot--board-row" ng-repeat="row in board.tiles track by $index">
+				<div class="threes-bot--board-tile" ng-repeat="tile in row track by $index" ng-class="getTileClass(tile)">{{tile}}</div>
+			</div>
+		</div>
+		<div class="threes-bot--next-tile">
+			<div class="threes-bot--board-tile" ng-class="getTileClass(tile)">{{board.nextTile}}</div>
+			<label>Next</label>
+		</div>
+		<div class="threes-bot--score">
+			<div>{{board.score | number}}</div>
+			<label>Score</label>
+		</div>
+		<div class="threes-bot--reset-btn threes-bot--btn red" ng-click="reset()">Reset</div>
+	</div>
+	<img class="threes-bot--bot-cable" src="/images/cable.svg">
+	<div class="threes-bot--monitor">
+		<img class="threes-bot--monitor-body" src="/images/monitor.svg">
+		<div  class="threes-bot--terminal" ui-ace="{
+			  useWrapMode : true,
+			  mode: 'javascript',
+			  onLoad: aceLoaded,
+			  onChange: aceChanged
+			}"></div>
+		<div class="threes-bot--manual" ng-show="showManual">
+			<div>Available variables:</div>
+			<ul>
+				<li>BOARD: an array of arrays representing the board</li>
+				<li>NEXT: the next tile</li>
+				<li>VALID_MOVES: all valid moves</li>
+				<li>RANDOM_NUMBER: a random number between 0 - 1 (Math.random())</li>
+				<li>RANDOM_MOVE: a random valid move</li>
+			</ul>
+		</div>
+		<div class="threes-bot--test-btn threes-bot--btn orange" ng-click="test()">Test</div>
+		<div class="threes-bot--analyze-btn threes-bot--btn green" ng-click="analyze()">Analyze</div>
+	</div>
+
+</div>

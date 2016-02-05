@@ -1,0 +1,69 @@
+@import "_mixins";
+
+.threes-bot--btn {
+	@include no-select;
+	padding: 7px 16px;
+	cursor: pointer;
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 13px;
+	font-weight: 600;
+
+	&.orange {
+		background: #FFE066;
+		color: darken(#FFE066, 50%);
+		@include box-shadow(1px, 2px, 0px, darken(#FFE066, 30%));
+
+		&:hover, &:active {
+			background: darken(#FFE066, 10%);
+		}
+	}
+
+	&.green {
+		background: #86e6d5;
+		color: darken(#86e6d5, 40%);
+		@include box-shadow(1px, 2px, 0px, darken(#86e6d5, 30%));
+
+		&:hover, &:active {
+			background: darken(#86e6d5, 7%);
+		}
+	}
+
+	&.red {
+		background: #ed8381;
+		color: darken(#F25F5C, 40%);
+		@include box-shadow(1px, 2px, 0px, darken(#F25F5C, 30%));
+
+		&:hover, &:active {
+			background: darken(#F25F5C, 7%);
+		}
+	}
+
+	&.twitter {
+		font-size: 12px;
+		letter-spacing: 0.1px;
+		padding: 5px 13px 7px 13px;
+		background: #57B5E3;
+		color: white;
+		@include box-shadow(1px, 2px, 0px, darken(#57B5E3, 30%));
+
+		&:hover, &:active {
+			background: darken(#57B5E3, 7%);
+		}
+
+		img {
+			width: 17px;
+			position: relative;
+			top: 3px;
+			left: -3px;
+		}
+	}
+
+	&:hover {
+		@include translateY(1px);
+	}
+
+	&:active {
+		@include translateY(2px);
+	}
+}
