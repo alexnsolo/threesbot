@@ -1,5 +1,6 @@
 angular.module('threes-bot').controller('HomeCtrl', function($scope, $meteor) {
 	$scope.board = new Threes.Board();
+	$scope.showManual = false;
 	$scope.code = "function chooseMove() {" +
 								"\n  return RANDOM_MOVE;" +
 								"\n}" +

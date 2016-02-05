@@ -23,21 +23,36 @@
 	<img class="threes-bot--bot-cable" src="/images/cable.svg">
 	<div class="threes-bot--monitor">
 		<img class="threes-bot--monitor-body" src="/images/monitor.svg">
-		<div  class="threes-bot--terminal" ui-ace="{
+		<div ng-hide="showManual" class="threes-bot--terminal" ui-ace="{
 			  useWrapMode : true,
 			  mode: 'javascript',
 			  onLoad: aceLoaded,
 			  onChange: aceChanged
 			}"></div>
 		<div class="threes-bot--manual" ng-show="showManual">
-			<div>Available variables:</div>
+			<div>
+				Write some JavaScript that will help Threes Bot determine the next move.
+				Your code must return "LEFT", "RIGHT", "UP", or "DOWN".
+			</div>
+			<br>
+			<div>Here are the helper variables that will be available to you:</div>
 			<ul>
 				<li>BOARD: an array of arrays representing the board</li>
+				<pre>
+[[0, 1, 2, 0]
+ [3, 0, 0, 0]
+ [0, 0, 0, 1]
+ [1, 0, 1, 0]]
+				</pre>
 				<li>NEXT: the next tile</li>
 				<li>VALID_MOVES: all valid moves</li>
 				<li>RANDOM_NUMBER: a random number between 0 - 1 (Math.random())</li>
 				<li>RANDOM_MOVE: a random valid move</li>
 			</ul>
+		</div>
+		<div class="threes-bot--manual-toggle" ng-click="showManual=!showManual">
+			<span ng-hide="showManual">Read Manual</span>
+			<span ng-show="showManual">Use Terminal</span>
 		</div>
 		<div class="threes-bot--test-btn threes-bot--btn orange" ng-click="test()">Test</div>
 		<div class="threes-bot--analyze-btn threes-bot--btn green" ng-click="analyze()">Analyze</div>
