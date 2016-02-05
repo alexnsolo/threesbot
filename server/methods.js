@@ -10,9 +10,13 @@ var copyBoard = function(board) {
 }
 
 Meteor.methods({
-	'Algorithm.test': function(algorithm, tiles, nextTile) {
-		if (_.isEmpty(algorithm.code)) {
+	'Algorithm.test': function(code, tiles, nextTile) {
+		if (_.isEmpty(code)) {
 			throw new Meteor.Error('validation', 'Algorithm must have code!');
+		}
+
+		if (code.length > MAX_CODE_LENGTH) {
+			throw new Meteor.Error('validation', 'Too much code!');
 		}
 
 		var future = new Future();
@@ -21,10 +25,10 @@ Meteor.methods({
 		board.tiles = tiles;
 		board.nextTile = nextTile;
 
-		var algorithmCode = Utils.decorateAlgorithm(algorithm.code, board);
+		var code = Utils.decorateAlgorithm(code, board);
 
 		var sandbox = new Sandbox();
-		sandbox.run(algorithmCode, function(output) {
+		sandbox.run(code, function(output) {
 			var direction = Utils.parseDirection(output.result);
 
 			if (board.isMoveValid(direction)) {
@@ -38,42 +42,26 @@ Meteor.methods({
 		return future.wait();
 	},
 
-	'Algorithm.analyze': function(algorithm) {
-		if (_.isEmpty(algorithm.code)) {
+	'Algorithm.analyze': function(code) {
+		if (_.isEmpty(code)) {
 			throw new Meteor.Error('validation', 'Algorithm must have code!');
 		}
 
-		// Create or update algorithm
-		var algorithmId = algorithm._id;
-		if (!algorithmId) {
-			algorithmId = Algorithms.insert({
-				code: algorithm.code
-			});
+		if (code.length > MAX_CODE_LENGTH) {
+			throw new Meteor.Error('validation', 'Too much code!');
 		}
 
-		var algorithm = Algorithms.findOne(algorithmId);
-		if (!algorithm) {
-			throw new Meteor.Error('not found', 'Algorithm not found!');
-		}
-
-		if (_.isEmpty(algorithm.code)) {
-			throw new Meteor.Error('validation', 'Algorithm must have code!');
-		}
-
-		// Clear out old analyses
-		Analyses.remove({algorithm_id: algorithmId});
-
-		// Create new analysis
-		var analysisId = Analyses.insert({
-			algorithm_id: algorithmId,
+		// Create algorithm
+		algorithmId = Algorithms.insert({
+			code: code,
 			runs: []
 		});
 
 		// Schedule analysis job
 		_.times(ALGORITHM_RUNS, function() {
-			Job.push(new AnalyzeAlgorithmJob({analysisId: analysisId}));
+			Job.push(new AnalyzeAlgorithmJob({algorithmId: algorithmId}));
 		});
 
-		return analysisId;
+		return algorithmId;
 	}
 });

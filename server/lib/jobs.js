@@ -1,5 +1,5 @@
 var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-  hasProp = {}.hasOwnProperty;
+	hasProp = {}.hasOwnProperty;
 
 AnalyzeAlgorithmJob = (function(superClass) {
 	extend(AnalyzeAlgorithmJob, superClass);
@@ -8,16 +8,13 @@ AnalyzeAlgorithmJob = (function(superClass) {
 		return AnalyzeAlgorithmJob.__super__.constructor.apply(this, arguments);
 	}
 
-  AnalyzeAlgorithmJob.prototype.handleJob = function() {
-		var analysisId = this.params.analysisId;
+	AnalyzeAlgorithmJob.prototype.handleJob = function() {
+		var future = new Future();
 
-		var analysis = Analyses.findOne(analysisId);
-		if (!analysis) {
-			throw new Error("Analysis not found!");
-		}
+		var algorithmId = this.params.algorithmId;
 
-		var algorithm = Algorithms.findOne(analysis.algorithm_id);
-		if (!analysis) {
+		var algorithm = Algorithms.findOne(algorithmId);
+		if (!algorithm) {
 			throw new Error("Algorithm not found!");
 		}
 
@@ -32,11 +29,12 @@ AnalyzeAlgorithmJob = (function(superClass) {
 				run.hitLimit = ticksCount >= MAX_ALGORITHM_TICKS;
 				run.score = board.score;
 				run.ticksCount = ticksCount;
+				run.time = Date.now();
 
-				// Add run to analysis
-				Analyses.update(analysisId, {$addToSet: {runs: run}});
-
-        console.log('Algorithm ' + algorithm._id + ' - run finished ');
+				// Add run to algorithm
+				console.log('Algorithm ' + algorithm._id + ' - run finished ');
+				Algorithms.update(algorithmId, {$addToSet: {runs: run}});
+				future.return();
 			}
 			else {
 				// Process run
@@ -76,22 +74,24 @@ AnalyzeAlgorithmJob = (function(superClass) {
 		}
 
 		// Start initial tick
-			var newBoard = new Threes.Board();
+		var newBoard = new Threes.Board();
 
 		var newRun = {
 			score: 0,
 			hasError: false,
-			hitLimit: false
-			// snapshots: []
+			hitLimit: false,
+			snapshots: []
 		};
 
-    // run.snapshots.push({
-    // 	step: 0,
-    // 	board: copyBoard(board),
-    // 	directionMoved: null
-    // });
+		// newRun.snapshots.push({
+		// 	step: 0,
+		// 	board: Utils.copyBoard(newBoard),
+		// 	directionMoved: null
+		// });
 
 		tick(newBoard, newRun, 0, false);
+
+		return future.wait();
 	};
 
 	return AnalyzeAlgorithmJob;
