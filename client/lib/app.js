@@ -8,18 +8,22 @@ angular.module('threes-bot').run(function() {
 	console.log('Threes Bot initialized.');
 });
 
-angular.module('threes-bot').controller('BoardCtrl', function($scope) {
+angular.module('threes-bot').controller('BoardCtrl', function($scope, $meteor) {
 	$scope.board = new Threes.Board();
-	console.log($scope.board);
+	$scope.algorithm = "";
 
-	$scope.canMove = function(direction) {
-		return $scope.board.isMoveValid(direction);
-	};
+	$scope.makeMove = function() {
+		$scope.error = false;
 
-	$scope.doMove = function(direction) {
-		if ($scope.canMove(direction)) {
-			$scope.board.moveInDirection(direction);
-		}
+		$meteor.call('Algorithm.execute', $scope.board.tiles, $scope.board.nextTile, $scope.algorithm)
+			.then(function(direction) {
+				if (direction != 'ERROR' && $scope.board.isMoveValid(direction)) {
+					$scope.board.moveInDirection(direction);
+				}
+				else {
+					$scope.error = true;
+				}
+			});
 	};
 
 	$scope.getTileClass = function(tile) {
@@ -36,4 +40,5 @@ angular.module('threes-bot').controller('BoardCtrl', function($scope) {
 			return "number";
 		}
 	};
+
 });

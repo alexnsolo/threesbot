@@ -19,3 +19,7 @@ insecure                # Allow all DB writes from clients (for prototyping)
 angular
 stevezhu:lodash
 fourseven:scss
+meteorhacks:npm
+
+
+npm-container

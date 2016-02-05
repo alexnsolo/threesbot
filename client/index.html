@@ -8,10 +8,9 @@
 		<div class="threes-bot--row" ng-repeat="row in board.tiles track by $index">
 			<div class="threes-bot--tile" ng-repeat="tile in row track by $index" ng-class="getTileClass(tile)">{{tile}}</div>
 		</div>
-		<div class="threes-bot--move-btn" ng-click="doMove('UP')" ng-class="{'enabled': canMove('UP')}">UP</div>
-		<div class="threes-bot--move-btn" ng-click="doMove('DOWN')" ng-class="{'enabled': canMove('DOWN')}">DOWN</div>
-		<div class="threes-bot--move-btn" ng-click="doMove('LEFT')" ng-class="{'enabled': canMove('LEFT')}">LEFT</div>
-		<div class="threes-bot--move-btn" ng-click="doMove('RIGHT')" ng-class="{'enabled': canMove('RIGHT')}">RIGHT</div>
+		<textarea cols="30" rows="10" ng-model="algorithm"></textarea>
+		<div class="threes-bot--move-btn" ng-click="makeMove()">EXECUTE</div>
+		<div ng-if="error">Oof! That doesn't work...</div>
 		<div>Next: {{board.nextTile}}</div>
 		<div>Has Lost? {{board.hasLost}}</div>
 		<div>Score: {{board.score}}</div>

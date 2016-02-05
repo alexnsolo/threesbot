@@ -27,12 +27,9 @@
 		@include no-select;
 		padding: 10px 20px;
 		border: 1px solid black;
-		background: gray;
-		display: inline-block;
-
-		&.enabled {
-			background: white;
-			cursor: pointer;
-		}
+		background: white;
+		cursor: pointer;
+		width: 100px;
+		text-align: center;
 	}
 }
