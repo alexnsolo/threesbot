@@ -13,10 +13,11 @@ Meteor.methods({
 		board.tiles = tiles;
 		board.nextTile = nextTile;
 
-		algorithm = "var TILES = " + JSON.stringify(tiles) + ";"
+		algorithm = "var BOARD = " + JSON.stringify(tiles) + ";"
 							+ "var NEXT = " + nextTile + ";"
 							+ "var VALID_MOVES = " + JSON.stringify(board.getValidMoves()) + ";"
-							+ "var RANDOM = " + Math.random() + ";"
+							+ "var RANDOM_NUMBER = " + Math.random() + ";"
+							+ "var RANDOM_MOVE = " + JSON.stringify(_.sample(board.getValidMoves())) + ";"
 							+ algorithm;
 
 		s.run(algorithm, function(output) {
