@@ -25,3 +25,9 @@ meteorhacks:npm
 npm-container
 mrt:q
 random
+differential:workers
+accounts-base
+ddp-rate-limiter
+rate-limit
+localstorage
+service-configuration

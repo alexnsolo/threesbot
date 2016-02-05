@@ -34,7 +34,6 @@ angular.module('threes-bot').controller('BoardCtrl', function($scope, $meteor) {
 
 		$meteor.call('Algorithm.analyze', $scope.algorithm)
 			.then(function(analysisId) {
-				console.log(analysisId);
 				$scope.helpers({
 			    analysis: () => Analyses.findOne(analysisId)
 			  });
