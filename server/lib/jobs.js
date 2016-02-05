@@ -29,7 +29,6 @@ AnalyzeAlgorithmJob = (function(superClass) {
 				run.hitLimit = ticksCount >= MAX_ALGORITHM_TICKS;
 				run.score = board.score;
 				run.ticksCount = ticksCount;
-				run.time = Date.now();
 
 				// Add run to algorithm
 				console.log('Algorithm ' + algorithm._id + ' - run finished ');

@@ -18,6 +18,10 @@
 			<div>{{board.score | number}}</div>
 			<label>Score</label>
 		</div>
+		<div class="threes-bot--last-move">
+			<div>{{lastMove}}</div>
+			<label>Last Move</label>
+		</div>
 		<div class="threes-bot--reset-btn threes-bot--btn red" ng-click="reset()">Reset</div>
 	</div>
 	<img class="threes-bot--bot-cable" src="/images/cable.svg">
@@ -51,11 +55,11 @@
 			</ul>
 		</div>
 		<div class="threes-bot--manual-toggle" ng-click="showManual=!showManual">
-			<span ng-hide="showManual">Read Manual</span>
+			<span ng-hide="showManual">View Manual</span>
 			<span ng-show="showManual">Use Terminal</span>
 		</div>
+		<div class="threes-bot--error" ng-if="error">ERROR!</div>
 		<div class="threes-bot--test-btn threes-bot--btn orange" ng-click="test()">Test</div>
 		<div class="threes-bot--analyze-btn threes-bot--btn green" ng-click="analyze()">Analyze</div>
 	</div>
-
 </div>

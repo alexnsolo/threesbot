@@ -1,0 +1,143 @@
+@import "_mixins";
+
+.threes-bot--monitor {
+	width: 450px;
+	height: 400px;
+	padding: 20px;
+
+	> * {
+		z-index: 2;
+	}
+
+	.threes-bot--terminal {
+		position: absolute;
+		top: 18px;
+		left: 57px;
+		bottom: 98px;
+		right: 16px;
+	}
+
+	.threes-bot--monitor-body {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		z-index: 1;
+	}
+
+	.threes-bot--manual {
+		position: absolute;
+		top: 28px;
+		left: 67px;
+		bottom: 108px;
+		right: 26px;
+		font-size: 12px;
+	}
+
+	.threes-bot--manual-toggle {
+		position: absolute;
+		bottom: 50px;
+    left: 131px;
+		color: rgba(white, 0.7);
+		font-size: 11px;
+		text-transform: uppercase;
+		font-weight: bold;
+		background: rgba(white, 0.1);
+		padding: 1px 3px;
+		cursor: pointer;
+
+		&:hover {
+			color: rgba(white, 0.9);
+			background: rgba(white, 0.3);
+		}
+	}
+
+	.threes-bot--error {
+		position: absolute;
+		bottom: 50px;
+    left: 231px;
+		color: #783458;
+		font-size: 11px;
+		text-transform: uppercase;
+		font-weight: bold;
+		background: #ED8381;
+		padding: 1px 3px;
+	}
+
+	.threes-bot--readonly {
+		position: absolute;
+		bottom: 50px;
+		left: 231px;
+		color: #B6D9D9;
+		font-size: 11px;
+		text-transform: uppercase;
+		font-weight: bold;
+		padding: 1px 3px;
+	}
+
+	.threes-bot--test-btn {
+		position: absolute;
+		bottom: -18px;
+		left: 40px;
+	}
+
+	.threes-bot--analyze-btn {
+		position: absolute;
+		bottom: -18px;
+		right: 0px;
+	}
+}
+
+
+@media only screen and (max-width: 900px) {
+	.threes-bot--monitor {
+		.threes-bot--monitor-body {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			bottom: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100%;
+		}
+
+		.threes-bot--terminal {
+			position: absolute;
+			top: 38px;
+			left: 15px;
+			bottom: 73px;
+			right: 14px;
+		}
+
+		.threes-bot--bot-cable {
+			display: none;
+		}
+
+		.threes-bot--test-btn {
+			position: absolute;
+			top: -20px;
+			bottom: auto;
+			left: 0px;
+		}
+
+		.threes-bot--manual-toggle {
+			position: absolute;
+			bottom: 31px;
+    	left: 86px;
+		}
+
+		.threes-bot--manual {
+			position: absolute;
+			top: 45px;
+			left: 37px;
+			right: 26px;
+			font-size: 11px;
+		}
+
+		.threes-bot--readonly,
+		.threes-bot--error {
+			position: absolute;
+			bottom: 31px;
+			left: 190px;
+		}
+	}
+}

@@ -1,14 +1,21 @@
-angular.module('threes-bot').controller('HomeCtrl', function($scope, $meteor) {
+angular.module('threes-bot').controller('HomeCtrl', function($scope, $meteor, $state, $rootScope) {
 	$scope.board = new Threes.Board();
 	$scope.showManual = false;
+	$scope.lastMove = "-";
 	$scope.code = "function chooseMove() {" +
 								"\n  return RANDOM_MOVE;" +
 								"\n}" +
 								"\n" +
 								"\nchooseMove();";
 
+	if ($rootScope.copyCode) {
+		$scope.code = $rootScope.copyCode;
+		$rootScope.copyCode = null;
+	}
+
 	$scope.aceLoaded = function(editor) {
 		editor.setValue($scope.code);
+		editor.session.selection.clearSelection();
 	};
 
 	$scope.aceChanged = function(event) {
@@ -26,6 +33,7 @@ angular.module('threes-bot').controller('HomeCtrl', function($scope, $meteor) {
 			.then(function(direction) {
 				if (direction != 'ERROR' && $scope.board.isMoveValid(direction)) {
 					$scope.board.moveInDirection(direction);
+					$scope.lastMove = direction;
 				}
 				else {
 					$scope.error = true;
@@ -34,12 +42,10 @@ angular.module('threes-bot').controller('HomeCtrl', function($scope, $meteor) {
 	};
 
 	$scope.analyze = function() {
-		// $meteor.call('Algorithm.analyze', $scope.code)
-		// 	.then(function(algorithmId) {
-		// 		$scope.helpers({
-		// 	    algorithm: () => Algorithms.findOne(algorithmId)
-		// 	  });
-		// 	});
+		$meteor.call('Algorithm.analyze', $scope.code)
+			.then(function(algorithmId) {
+				$state.go('algorithm', {algorithmId: algorithmId});
+			});
 	};
 
 	$scope.getTileClass = function(tile) {
