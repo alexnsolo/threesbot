@@ -13,7 +13,7 @@ body {
 	text-align: right;
 	padding: 20px 0 50px 0;
 
-	a.threes-bot--title {
+	.threes-bot--title {
 		@include text-shadow(1px, 1px, 1px, darken(#F25F5C, 50%));
 		font-family: 'Lobster', 'Open Sans', sans-serif;
 		font-size: 80px;
