@@ -1,6 +1,5 @@
 _ = lodash
 Future = Npm.require('fibers/future');
-Sandbox = Meteor.npmRequire('sandbox');
 
 var copyBoard = function(board) {
 	return _.cloneDeep({
