@@ -1,8 +1,8 @@
 {
   "cluster": {
-    "count": 2
+    "count": 10
   },
   "workers": {
-    "count": 5
+    "count": 1
   }
 }

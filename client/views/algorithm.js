@@ -40,7 +40,7 @@ angular.module('threes-bot').controller('AlgorithmCtrl', function($scope, $meteo
 	};
 
 	$scope.isPending = function() {
-		return $scope.algorithm.runs.length < ALGORITHM_RUNS;
+		return $scope.algorithm.runs.length < ALGORITHM_RUNS * 0.8;
 	};
 
 	$scope.edit = function() {

@@ -51,29 +51,33 @@
 	<div class="threes-bot--monitor">
 		<img class="threes-bot--monitor-body" src="/images/monitor.svg">
 		<div ng-hide="showManual" class="threes-bot--terminal" ui-ace="{
-			  useWrapMode : true,
+			  useWrapMode : false,
 			  mode: 'javascript',
 			  onLoad: aceLoaded
 			}"></div>
 		<div class="threes-bot--manual" ng-show="showManual">
 			<div>
 				Write some JavaScript that will help Threes Bot determine the next move.
-				Your code must return "LEFT", "RIGHT", "UP", or "DOWN".
+				The last statement must equal "LEFT", "RIGHT", "UP", or "DOWN".
+				Your code will run in a sandbox, so only the standard JavaScript API will be available.
 			</div>
 			<br>
-			<div>Here are the helper variables that will be available to you:</div>
+			<div>Here are some helpers to assist you:</div>
 			<ul>
-				<li>BOARD: an array of arrays representing the board</li>
+				<li><b>BOARD</b>: an array of arrays representing the board</li>
 				<pre>
-[[0, 1, 2, 0]
- [3, 0, 0, 0]
- [0, 0, 0, 1]
+[[0, 1, 2, 0],
+ [3, 0, 0, 0],
+ [0, 0, 0, 1],
  [1, 0, 1, 0]]
 				</pre>
-				<li>NEXT: the next tile</li>
-				<li>VALID_MOVES: all valid moves</li>
-				<li>RANDOM_NUMBER: a random number between 0 - 1 (Math.random())</li>
-				<li>RANDOM_MOVE: a random valid move</li>
+				<li><b>NEXT</b>: the next tile (ex. 1)</li>
+				<li><b>VALID_MOVES</b>: all valid moves (ex. ["LEFT","UP"])</li>
+				<li><b>RANDOM_NUMBER</b>: a random number between 0 - 1 (Math.random())</li>
+				<li><b>RANDOM_MOVE</b>: a random valid move (ex. "LEFT")</li>
+				<li><b>FREE_SPACES</b>: the number of free spaces on the board (ex. 7)</li>
+				<li><b>FREE_SPACES_AFTER_MOVE</b>: the number of free spaces after a <i>valid</i> move is made. (ex. {LEFT: 4, RIGHT: 3, DOWN: 1})</li>
+				<li><b>log()</b>: log a message</li>
 			</ul>
 		</div>
 		<div class="threes-bot--manual-toggle" ng-click="showManual=!showManual">

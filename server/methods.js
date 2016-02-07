@@ -28,14 +28,7 @@ Meteor.methods({
 
 		var sandbox = new Sandbox();
 		sandbox.run(code, function(output) {
-			var direction = Utils.parseDirection(output.result);
-
-			if (board.isMoveValid(direction)) {
-				future.return(direction);
-			}
-			else {
-				future.return(null);
-			}
+			future.return(output);
 		});
 
 		return future.wait();

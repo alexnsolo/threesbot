@@ -30,8 +30,17 @@ angular.module('threes-bot').controller('HomeCtrl', function($scope, $meteor, $s
 		$scope.error = false;
 
 		$meteor.call('Algorithm.test', $scope.code, $scope.board.tiles, $scope.board.nextTile)
-			.then(function(direction) {
-				if (direction != 'ERROR' && $scope.board.isMoveValid(direction)) {
+			.then(function(output) {
+				// Log output
+				if (!_.isEmpty(output.console)) {
+					output.console.forEach(function(message) {
+						console.log(message);
+					});
+				}
+
+				var direction = Utils.parseDirection(output.result);
+
+				if ($scope.board.isMoveValid(direction)) {
 					$scope.board.moveInDirection(direction);
 					$scope.lastMove = direction;
 				}
