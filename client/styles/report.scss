@@ -31,6 +31,11 @@
 		font-size: 12px;
 	}
 
+	.threes-bot--report-scores-container {
+		max-height: 300px;
+		overflow-y: auto;
+	}
+
 	.threes-bot--report-scores {
 		background: rgba(white, 0.5);
 		height: 80px;

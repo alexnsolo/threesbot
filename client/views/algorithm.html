@@ -16,37 +16,39 @@
 				<label>Average Score</label>
 			</div>
 		</div>
-		<table class="threes-bot--runs" cellpadding="3">
-			<thead>
-				<tr>
-					<th>Test #</th>
-					<th>Score</th>
-					<th>Moves</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="run in algorithm.runs track by $index">
-					<td>{{$index+1}}</td>
-					<td>{{run.score}}</td>
-					<td>{{run.ticksCount}}</td>
-					<td>
-						<span class="error" ng-show="run.hasError || run.hitLimit">
-							<span ng-show="run.errorType=='timeout'">TIMED OUT</span>
-							<span ng-show="run.hitLimit">LIMIT</span>
-							<span ng-show="run.errorType!='timeout' && !run.hitLimit">ERROR</span>
-						</span>
-						<span class="success" ng-show="!run.hasError && !run.hitLimit">OK</span>
-					</td>
-				</tr>
-				<tr ng-show="isPending()">
-					<td>{{algorithm.runs.length+1}}</td>
-					<td>-</td>
-					<td>-</td>
-					<td class="pending">PENDING</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="threes-bot--report-scores-container">
+			<table class="threes-bot--runs" cellpadding="3">
+				<thead>
+					<tr>
+						<th>Test #</th>
+						<th>Score</th>
+						<th>Moves</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="run in algorithm.runs track by $index">
+						<td>{{$index+1}}</td>
+						<td>{{run.score}}</td>
+						<td>{{run.ticksCount}}</td>
+						<td>
+							<span class="error" ng-show="run.hasError || run.hitLimit">
+								<span ng-show="run.errorType=='timeout'">TIMED OUT</span>
+								<span ng-show="run.hitLimit">LIMIT</span>
+								<span ng-show="run.errorType!='timeout' && !run.hitLimit">ERROR</span>
+							</span>
+							<span class="success" ng-show="!run.hasError && !run.hitLimit">OK</span>
+						</td>
+					</tr>
+					<tr ng-show="isPending()">
+						<td>{{algorithm.runs.length+1}}</td>
+						<td>-</td>
+						<td>-</td>
+						<td class="pending">PENDING</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<div class="threes-bot--monitor">
 		<img class="threes-bot--monitor-body" src="/images/monitor.svg">
