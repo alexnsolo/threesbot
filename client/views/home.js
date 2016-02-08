@@ -45,6 +45,7 @@ angular.module('threes-bot').controller('HomeCtrl', function($scope, $meteor, $s
 					$scope.lastMove = direction;
 				}
 				else {
+					console.log(output.result);
 					$scope.error = true;
 				}
 			});
